@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+instance/
+build/
+.env
+.DS_Store
+
+# Legacy static prototype (superseded by the Flask app)
+/index.html

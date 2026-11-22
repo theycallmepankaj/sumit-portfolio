@@ -1,0 +1,89 @@
+{% from "partials/icons.html" import icon, cta, eyebrow %}<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}{{ profile.name }} — {{ profile.title }}{% endblock %}</title>
+  <meta name="description" content="{{ profile.description }}" />
+  <meta name="theme-color" content="#dfe3f5" />
+  <link rel="canonical" href="{{ site_url }}/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="{{ site_url }}/" />
+  <meta property="og:title" content="{{ profile.name }} — {{ profile.title }}" />
+  <meta property="og:description" content="{{ profile.description }}" />
+  <meta name="twitter:card" content="summary" />
+
+  <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ asset('css/styles.css') }}" />
+
+  {# Enables JS-only animation styles before first paint (no flash of hidden content). #}
+  <script nonce="{{ csp_nonce() }}">document.documentElement.classList.add("js");setTimeout(function(){var h=document.querySelector("[data-hero]");if(h)h.classList.add("is-ready");var t=document.querySelector(".hero-title");if(t)t.classList.add("is-loaded");},3000);</script>
+  <script type="application/ld+json" nonce="{{ csp_nonce() }}">
+  {{ {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": profile.name,
+    "jobTitle": profile.title,
+    "url": site_url ~ "/",
+    "email": "mailto:" ~ profile.email,
+    "address": {"@type": "PostalAddress", "addressLocality": "Indore", "addressCountry": "IN"},
+    "sameAs": [profile.linkedin]
+  } | tojson }}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="frame">
+    <header class="header" id="header">
+      <span class="scroll-progress" aria-hidden="true"></span>
+      <nav class="nav" aria-label="Primary">
+        <a href="{{ url_for('main.index') }}#top" class="logo" aria-label="{{ profile.name }} — home">
+          <span class="logo-mark">{{ icon("spark", 16) }}</span>
+          <span class="logo-text">{{ profile.short_name }}<span class="logo-dot">.</span></span>
+        </a>
+
+        <ul class="nav-links" id="nav-links">
+          {% for anchor, label in nav %}
+          <li><a href="{{ url_for('main.index') }}#{{ anchor }}" class="nav-link" data-section="{{ anchor }}">{{ label }}</a></li>
+          {% endfor %}
+          <li class="nav-mobile-cta">{{ cta("Get In Touch", url_for('main.index') ~ "#contact") }}</li>
+        </ul>
+
+        <div class="nav-actions">
+          <span class="hide-sm">{{ cta("Get In Touch", url_for('main.index') ~ "#contact") }}</span>
+          <button class="menu-btn" id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+            <span></span><span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+      {% block footer_top %}{% endblock %}
+      <div class="footer-bottom">
+        <p>Designed &amp; developed by {{ profile.name }} · © {{ now_year }}</p>
+        <ul class="socials" aria-label="Social links">
+          <li><a href="{{ profile.linkedin }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">{{ icon("linkedin", 15) }}</a></li>
+          <li><a href="mailto:{{ profile.email }}" aria-label="Email">{{ icon("mail", 15) }}</a></li>
+          <li><a href="tel:{{ profile.phone }}" aria-label="Phone">{{ icon("phone", 15) }}</a></li>
+          <li><a href="{{ url_for('main.resume') }}" target="_blank" rel="noopener" aria-label="Résumé (PDF)">{{ icon("file", 15) }}</a></li>
+        </ul>
+        <a href="#top" class="back-top">Back to top ↑</a>
+      </div>
+    </footer>
+  </div>
+
+  <a href="#top" class="to-top" id="to-top" aria-label="Back to top">{{ icon("arrow-up", 18) }}</a>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="{{ asset('js/main.js') }}" defer></script>
+</body>
+</html>

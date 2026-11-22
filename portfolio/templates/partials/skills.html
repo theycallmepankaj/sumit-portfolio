@@ -1,0 +1,31 @@
+{% from "partials/icons.html" import icon, cta, eyebrow %}
+<section class="section" id="skills">
+  <header class="section-head center reveal">
+    {{ eyebrow("Toolkit") }}
+    <h2 class="section-title">Skills &amp; tools</h2>
+  </header>
+
+  <div class="skill-grid">
+    {% for group in skills %}
+    <article class="skill-card reveal">
+      {# Abstract visuals stand in for the reference's article photos. #}
+      <div class="skill-art art-{{ group.visual }}" aria-hidden="true">
+        {% if group.visual == "annotate" %}
+          <span class="sa-box"><em>label · 0.97</em></span><span class="sa-blob"></span>
+        {% elif group.visual == "code" %}
+          <span class="sa-code">&lt;/&gt;</span>
+        {% else %}
+          <span class="sa-grid">{% for _ in range(9) %}<i></i>{% endfor %}</span>
+        {% endif %}
+      </div>
+      <div class="skill-head">
+        <h3>{{ group.title }}</h3>
+        <span class="skill-tag">{{ group.tag }}</span>
+      </div>
+      <ul class="tag-row">
+        {% for item in group["items"] %}<li>{{ item }}</li>{% endfor %}
+      </ul>
+    </article>
+    {% endfor %}
+  </div>
+</section>

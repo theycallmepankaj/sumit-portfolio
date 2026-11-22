@@ -1,0 +1,45 @@
+{% from "partials/icons.html" import icon, cta, eyebrow %}
+<section class="section" id="work">
+  <header class="section-head center reveal">
+    {{ eyebrow("My Portfolio") }}
+    <h2 class="section-title">Selected projects</h2>
+  </header>
+
+  {% for p in projects %}
+  <article class="project reveal">
+    <div class="project-info">
+      <span class="project-num" aria-hidden="true">{{ "%02d"|format(loop.index) }}</span>
+      <span class="project-kicker">{{ p.kicker }}</span>
+      <h3 class="project-title">{{ p.name }}</h3>
+      <p class="project-desc">{{ p.summary }}</p>
+      <ul class="tag-row">
+        {% for t in p.stack %}<li>{{ t }}</li>{% endfor %}
+      </ul>
+      {{ cta("Explore Project", p.url, attrs='target="_blank" rel="noopener noreferrer"') }}
+    </div>
+
+    <div class="project-visual" aria-hidden="true">
+      <div class="device">
+        <div class="device-bar">
+          <span class="dots"><i></i><i></i><i></i></span>
+          <span class="device-url">{{ p.url_display }}</span>
+        </div>
+        <div class="device-body">
+          <div class="call">
+            <span class="call-label">Live session · Figma basics</span>
+            <span class="call-pip">You</span>
+            <span class="call-controls"><i></i><i class="end"></i><i></i></span>
+          </div>
+          <div class="chat">
+            <div class="bubble in">Can you share the wireframe file?</div>
+            <div class="bubble out">Sent! I'll help with React hooks 🙌</div>
+            <div class="typing"><i></i><i></i><i></i></div>
+          </div>
+        </div>
+      </div>
+      <span class="orb orb-1"></span>
+      <span class="orb orb-2"></span>
+    </div>
+  </article>
+  {% endfor %}
+</section>

@@ -1,0 +1,52 @@
+{% from "partials/icons.html" import icon, cta, eyebrow %}
+{% set sv = services %}
+<section class="section services" id="services">
+  <header class="section-head center reveal">
+    {{ eyebrow("What I Do", light=True) }}
+    <h2 class="section-title light">Data work for<br />better AI</h2>
+  </header>
+
+  <div class="svc-grid">
+    <article class="svc svc-blue svc-annotation reveal">
+      <h3>{{ sv.annotation.title }}</h3>
+      <p>{{ sv.annotation.text }}</p>
+      <div class="svc-tags" aria-hidden="true">
+        {% for t in sv.annotation.tags %}<span style="--i: {{ loop.index0 }}">{{ t }}</span>{% endfor %}
+      </div>
+    </article>
+
+    <article class="svc svc-white svc-eval reveal">
+      <h3>{{ sv.evaluation.title }}</h3>
+      <p>{{ sv.evaluation.text }}</p>
+      <div class="svc-rubric" aria-hidden="true">
+        {% for label, pct in sv.evaluation.rubric %}
+        <div class="rb"><span>{{ label }}</span><div class="rb-bar"><i style="--w: {{ pct }}%"></i></div></div>
+        {% endfor %}
+      </div>
+    </article>
+
+    <article class="svc svc-white svc-cta reveal">
+      <div class="svc-cta-art" aria-hidden="true"><span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span><span class="core"></span></div>
+      <span class="chip-soft">{{ sv.cta.kicker }}</span>
+      <h3>{{ sv.cta.title }}</h3>
+      {{ cta("Start a Conversation", "#contact") }}
+    </article>
+
+    <article class="svc svc-blue svc-qa reveal">
+      <h3>{{ sv.qa.title }}</h3>
+      <p>{{ sv.qa.text }}</p>
+      <ul class="svc-checks" aria-hidden="true">
+        {% for c in sv.qa.checks %}<li style="--i: {{ loop.index0 }}"><span>{{ icon("check", 12) }}</span>{{ c }}</li>{% endfor %}
+      </ul>
+    </article>
+
+    <article class="svc svc-white svc-dev reveal">
+      <h3>{{ sv.development.title }}</h3>
+      <p>{{ sv.development.text }}</p>
+      <div class="svc-orbit" aria-hidden="true">
+        <span class="arc a1"></span><span class="arc a2"></span><span class="arc a3"></span>
+        {% for t in sv.development.stack %}<span class="orbit-chip" style="--i: {{ loop.index0 }}; --n: {{ sv.development.stack|length }}">{{ t }}</span>{% endfor %}
+      </div>
+    </article>
+  </div>
+</section>

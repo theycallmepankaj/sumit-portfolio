@@ -1,0 +1,21 @@
+# One-click deploy on Render (Blueprint). Free plan works.
+services:
+  - type: web
+    name: sumit-portfolio
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn wsgi:app --workers 2 --threads 4 --bind 0.0.0.0:$PORT --access-logfile -
+    healthCheckPath: /healthz
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: APP_ENV
+        value: production
+      - key: TRUST_PROXY
+        value: "true"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: MAIL_TO
+        value: kancholesumit@gmail.com
+      # Add SITE_URL, SMTP_HOST, SMTP_USER, SMTP_PASSWORD in the Render dashboard.

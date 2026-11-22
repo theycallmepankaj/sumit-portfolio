@@ -1,0 +1,39 @@
+{% from "partials/icons.html" import icon, cta, eyebrow %}
+<section class="section" id="about">
+  <div class="about-intro">
+    <div class="reveal">{{ eyebrow("About Me") }}</div>
+    <h2 class="about-statement reveal">{{ about.statement|rich }}</h2>
+  </div>
+
+  <div class="about-grid">
+    {# Replaces the reference's portrait: a principles card, no avatar. #}
+    <article class="principle-card reveal">
+      <div class="principle-orb" aria-hidden="true"></div>
+      <p class="principle-title">{{ about.principle[0] }}<br /><span>{{ about.principle[1] }}</span></p>
+      <div class="principle-foot">
+        <span class="principle-loc">{{ icon("pin", 15) }} {{ profile.location_short }}</span>
+        <a href="{{ url_for('main.resume') }}" class="link-pill" target="_blank" rel="noopener">{{ icon("download", 15) }} Résumé</a>
+      </div>
+    </article>
+
+    <article class="info-card reveal">
+      <div class="info-head">
+        <span class="info-num">{{ about.domains|length }}</span>
+        <span class="info-label">Domains covered</span>
+      </div>
+      <ul class="domain-list">
+        {% for d in about.domains %}<li><span>{{ "%02d"|format(loop.index) }}</span>{{ d }}</li>{% endfor %}
+      </ul>
+    </article>
+
+    <article class="info-card reveal">
+      <div class="info-head">
+        <span class="info-icon">{{ icon("check", 18) }}</span>
+        <span class="info-label">{{ about.values_title[0] }} {{ about.values_title[1]|lower }}</span>
+      </div>
+      <ul class="value-list">
+        {% for v in about["values"] %}<li>{{ icon("check", 14) }} {{ v }}</li>{% endfor %}
+      </ul>
+    </article>
+  </div>
+</section>

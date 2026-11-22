@@ -1,0 +1,14 @@
+{% from "partials/icons.html" import icon, cta, eyebrow %}
+{% extends "base.html" %}
+{% block title %}Page not found — {{ profile.name }}{% endblock %}
+{% block content %}
+<section class="notfound">
+  <p class="hero-backdrop" aria-hidden="true">404</p>
+  <div class="notfound-inner">
+    {{ eyebrow("Error 404 · label: missing") }}
+    <h1 class="section-title">This page didn't<br />pass QA.</h1>
+    <p>The link may be broken, or the page may have moved.</p>
+    {{ cta("Back to the portfolio", url_for('main.index')) }}
+  </div>
+</section>
+{% endblock %}

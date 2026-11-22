@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% include "partials/hero.html" %}
+  {% include "partials/about.html" %}
+  {% include "partials/work.html" %}
+
+  <div class="navy-band">
+    {% include "partials/services.html" %}
+    {% include "partials/experience.html" %}
+  </div>
+
+  {% include "partials/process.html" %}
+  {% include "partials/skills.html" %}
+{% endblock %}
+
+{% block footer_top %}
+  {% include "partials/contact.html" %}
+{% endblock %}

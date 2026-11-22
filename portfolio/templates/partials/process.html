@@ -1,0 +1,19 @@
+{% from "partials/icons.html" import icon, cta, eyebrow %}
+<section class="section" id="process">
+  <header class="section-head center reveal">
+    {{ eyebrow("How I Work") }}
+    <h2 class="section-title">My workflow</h2>
+  </header>
+
+  {# A scannable step timeline: every step visible at once, no clicking required. #}
+  <ol class="steps reveal">
+    {% for step in process %}
+    <li class="step" style="--i: {{ loop.index0 }}">
+      <span class="step-icon">{{ icon(step.icon, 20) }}</span>
+      <span class="step-num">{{ "%02d"|format(loop.index) }}</span>
+      <h3>{{ step.title }}</h3>
+      <p>{{ step.text }}</p>
+    </li>
+    {% endfor %}
+  </ol>
+</section>

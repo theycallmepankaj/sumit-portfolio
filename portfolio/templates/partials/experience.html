@@ -1,0 +1,35 @@
+{% from "partials/icons.html" import icon, cta, eyebrow %}
+<section class="section experience" id="experience">
+  <header class="section-head center reveal">
+    {{ eyebrow("Experience", light=True) }}
+    <h2 class="section-title light">Where I've worked</h2>
+  </header>
+
+  <div class="xp-grid">
+    {% for job in experience %}
+    <article class="xp-card {% if job.featured %}xp-featured{% else %}xp-dark{% endif %} reveal">
+      <div class="xp-top">
+        <span class="xp-company">{{ job.company }}</span>
+        {% if job.featured %}<span class="xp-badge">Latest</span>{% endif %}
+      </div>
+      <p class="xp-headline"><strong>{{ job.headline_value }}</strong> <span>/ {{ job.headline_unit }}</span></p>
+      <h3 class="xp-role">{{ job.role }}</h3>
+      <p class="xp-meta">{{ job.start }} — {{ job.end }} · {{ job.location }}</p>
+
+      <ul class="xp-list">
+        {% for point in job.points %}<li>{{ point|rich }}</li>{% endfor %}
+      </ul>
+    </article>
+    {% endfor %}
+  </div>
+
+  <div class="edu-row reveal">
+    {% for e in education %}
+    <div class="edu-card">
+      <span class="edu-years">{{ e.years }}</span>
+      <h3>{{ e.degree }}</h3>
+      <p>{{ e.school }}</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
