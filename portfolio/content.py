@@ -64,6 +64,16 @@ PROJECTS = [
         "stack": ["React", "Node", "Express", "MongoDB", "WebRTC", "Socket.io", "JWT"],
         "url": "https://skillhub-mern-project-frontend.onrender.com",
         "url_display": "skillhub.onrender.com",
+        "visual": "skillhub",
+    },
+    {
+        "name": "TaskSpace",
+        "kicker": "Full-stack · MERN",
+        "summary": "Task & workspace manager with Admin/Member panels, task tracking and JWT auth.",
+        "stack": ["React", "Node", "Express", "MongoDB", "JWT"],
+        "url": "",  # add the live link here when it's deployed
+        "url_display": "taskspace.app",
+        "visual": "taskspace",
     },
 ]
 

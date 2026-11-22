@@ -15,7 +15,7 @@
       <ul class="tag-row">
         {% for t in p.stack %}<li>{{ t }}</li>{% endfor %}
       </ul>
-      {{ cta("Explore Project", p.url, attrs='target="_blank" rel="noopener noreferrer"') }}
+      {% if p.url %}{{ cta("Explore Project", p.url, attrs='target="_blank" rel="noopener noreferrer"') }}{% endif %}
     </div>
 
     <div class="project-visual" aria-hidden="true">
@@ -24,6 +24,25 @@
           <span class="dots"><i></i><i></i><i></i></span>
           <span class="device-url">{{ p.url_display }}</span>
         </div>
+        {% if p.visual == "taskspace" %}
+        <div class="device-body board">
+          {% for col, cards in [
+            ("To do", [("Design login page", "Member"), ("Set up roles", "Admin")]),
+            ("In progress", [("Task assignment API", "Admin")]),
+            ("Done", [("JWT auth", "Member"), ("Create workspace", "Admin")]),
+          ] %}
+          <div class="board-col">
+            <span class="board-head">{{ col }} <b>{{ cards|length }}</b></span>
+            {% for title, who in cards %}
+            <div class="board-card{% if loop.index0 == 0 and col == 'In progress' %} is-moving{% endif %}">
+              <span>{{ title }}</span>
+              <i class="who who-{{ who|lower }}">{{ who }}</i>
+            </div>
+            {% endfor %}
+          </div>
+          {% endfor %}
+        </div>
+        {% else %}
         <div class="device-body">
           <div class="call">
             <span class="call-label">Live session · Figma basics</span>
@@ -36,6 +55,7 @@
             <div class="typing"><i></i><i></i><i></i></div>
           </div>
         </div>
+        {% endif %}
       </div>
       <span class="orb orb-1"></span>
       <span class="orb orb-2"></span>
